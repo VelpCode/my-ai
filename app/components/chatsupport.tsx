@@ -6,6 +6,7 @@ import { useState } from "react"
 export default function ChatSupport() {
 
     const [isOpen, setOpen] = useState(false)
+    const [isDisplay, setDisplay] = useState(true)
 
     return (
 
@@ -28,10 +29,34 @@ export default function ChatSupport() {
                     )}
                     
                     onClick={() => {
-                        setOpen(!isOpen);
+                        if(!isOpen) {
+                            setOpen(!isOpen);
+                            setDisplay(false);
+                        }
+
                     }}
+
+                    onAnimationComplete={() => {
+                        if(!isOpen) {
+                            setDisplay(true);
+                        }
+                    }}  
                     
                     >
+
+                    {isDisplay && <h1 className="text-lg align-middle ml-3">🪐</h1>}
+
+                    {isOpen &&
+                        <div className="w-full h-full border-bottom-b p-5 font-semibold flex justify-between">
+
+                        <h1 className="text-2xl text-neutral-600">👾 AI Assistant</h1>
+
+                        <div onClick={() => {
+                            setOpen(false);
+                        }}>-</div>
+                    </div>
+                    
+                    }
                     
                 </motion.div>
             </div>
